@@ -1,0 +1,115 @@
+{% extends 'layout.html' %}
+
+{% block title %}
+Lista de Platos
+{% endblock %}
+
+{% block contenido %}
+{% if g.user.rol == "cliente" %}
+<div style="position: absolute; left: 48%; top: 11%; width: 7%; height: 5%; display: flex; flex-direction: column; align-items: center; justify-content: center;">
+<a href="{{url_for('finalizar_pedido')}}" style="align-items: center; display: flex; flex-direction: row;">
+    <div style="display: flex; flex-direction: row; margin-right: 2em;">
+        <p class="titulo" style="margin-bottom: 0; display: inline-block; text-align: center;">Carrito</p>
+        <div style="display: flex; flex-direction: row; align-items: center; justify-content: center;">
+            <img src="{{ url_for('static', filename='img/cart.png') }}" style="width: 3em;"> 
+            <p class="titulo" style="margin-left: 0;">{{cart}}</p>
+        </div>
+    </div>
+    <div style="display: flex; flex-direction: row">
+        <p class="titulo" style="text-align: center; width:max-content">Lista de deseos</p>
+        <div style="display: flex; flex-direction: row; align-items: center; justify-content: center;">
+            <img src="{{ url_for('static', filename='img/heart.png') }}" style="width: 2em; align-self: center; margin: 0em;"> 
+            <p class="titulo" >{{deseos}}</p>
+        </div>
+    </div>
+</a>
+
+</div>
+{%endif%}
+<div class="center">
+<div class="titulo">
+    <h1>Platos</h1>
+</div>
+<div style="width: 100%; display: flex; flex-direction: column; align-items: center;">
+    <table class="lista">
+        
+        {% if lista %}
+            <tr style="border-spacing: 0ch; width: 100%">
+                {% if g.user.rol == "Administrador" or g.user.rol == "Super Administrador" %}
+                <th class="texto_opaco">
+                    Id
+                </th>
+                {%endif%}
+                <th class="texto_opaco">
+                    Nombre
+                </th>
+                <th class="texto_opaco">
+                    Descripción
+                </th>
+                <th class="texto_opaco" style="width: auto;">
+                    Precio
+                </th>
+                {% if g.user.rol == "cliente" %}
+                <th class="texto_opaco" style="width: auto;">
+                </th>
+                {%endif%}
+                {% if g.user.rol == "Administrador" or g.user.rol == "Super Administrador" %}
+                <th class="texto_opaco">
+                    Editar
+                </th>
+                <th class="texto_opaco">
+                    Eliminar
+                </th>
+                {%endif%}
+            </tr>
+            {% for item in lista if item.disponible != "N" %}
+                <tr>
+                    {% if g.user.rol == "Administrador" or g.user.rol == "Super Administrador" %}
+                    <td>{{ item.id }}</td>
+                    {% endif %}
+                    <td>{{ item.nombre }}</td>
+                    <td style="max-width: 50em; height: 15px; font-size: small; white-space:nowrap; overflow: hidden; text-overflow: ellipsis;">{{ item.descripcion }}</td>
+                    <td>${{ item.precio }}</td>
+                    {% if g.user.rol == "cliente" %}
+                    <td hidden>
+                        <a href="#"><img id="imgCalificar" src="{{ url_for('static', filename='img/Stars-01.png') }}"/></a>
+                    </td>
+                    <td>
+                        <a href="{{ url_for('agregar_pedido', id=item.id) }}">Agregar al pedido</a>
+                    </td>
+                    <td>
+                        <a href="{{ url_for('lista_deseos', id=item.id) }}"><img id="imgCalificar" src="{{ url_for('static', filename='img/heart.png') }}"/></a>
+                    </td>
+                    {% endif %}
+                    {% if g.user.rol == "Administrador" or g.user.rol == "Super Administrador" %}
+                        <td>
+                            <a href="{{ url_for('detail_plato', id_plato=item.id) }}"><img id="imgEditar" src="{{ url_for('static', filename='img/editarplato.png') }}"/></a>
+                        </td>
+                    <td>
+                        <a href="{{ url_for('eliminar_plato', id=item.id) }}"><img id="imgEliminar" src="{{ url_for('static', filename='img/eliminar.png') }}" /></a>
+                    </td>
+                    {% endif %}
+                </tr>
+            {% endfor %}
+        {% else %}
+            <tr>
+                <td colspan="4">No se encontraron platos en la base de datos</td>
+            </tr>
+        {% endif %} 
+
+    </table>
+    <div style="align-self: center;">
+        {% if mensaje %}
+            {{ mensaje }}
+        {% endif %}
+    </div> 
+</div>
+<div style="display: flex; width: 80%; flex-direction:row; justify-content: center; margin-left: auto; margin-right: auto;">
+    {% if session.get('rol') == "Administrador" or g.user.rol == "Super Administrador" %}
+    <button class="boton" style="width: auto; margin: 5em;" onclick="document.location='/agregar-plato'">Agregar Plato</button>
+    
+    <button class="boton" style="width: auto;" onclick="document.location='/inicio'">Volver</button>
+    {% endif %}
+</div>
+</div>
+{% endblock %}

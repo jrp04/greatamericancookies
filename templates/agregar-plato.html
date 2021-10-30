@@ -1,0 +1,51 @@
+{% extends 'layout.html' %}
+
+{% block title %}
+Agregar Plato
+{% endblock %}
+
+{% block contenido %}
+<div class="container" style="top: 35em;">
+    <form action="{{ url_for('agregarplato') }}" method="POST" novalidate>
+    <div class="texto_opaco" style="display: flex; flex-direction: column; justify-content: center; align-items: center;">
+        <h2>Plato:</h2>
+        <h1 class="titulo" style="margin:0%">{{form.nombre(class="box")}}</h1>
+    </div>
+
+    <div style="display:flex; flex-direction: row; justify-content: center;align-items: center;">
+        <div style="display: flex; flex-direction: column; width: 35%; align-items: center; padding: 0%; align-content: center;">
+            <div><label class="titulo">Foto de perfil</label></div>
+            <div><img class="img-detalleusuario" src="{{ url_for('static', filename='img/cookie.PNG') }}"></div>
+            <div><a class="texto_opaco" href="#">Editar imagen</a></div>
+        </div>
+        <div style="width: 60%; height: 100%; float: center; padding: 5%; vertical-align: middle;">
+                {{ form.hidden_tag() }}
+                <table class="lista" style="vertical-align: baseline;">
+                    <tr>
+                        <th style="font-weight: 500;">Descripción</th>
+                        <td class="input" style="resize: none;"> {{form.descripcion(class="box", rows=10)}}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th style="font-weight: 500;">Precio</th>
+                        <td class="input">{{ form.precio(class="box", placeholder=Precio)}}</td>
+                    </tr>
+                </table>
+
+                <div style="display: flex; flex-direction: column; justify-content: center; align-items: center;">
+                    {% if mensaje %}
+                        {{ mensaje }}
+                    {% endif %}
+                    <button class="boton" style="width: auto; margin: 2em; "> {{ form.enviar(class="boton") }} </button>
+                </div>     
+               
+            </form>
+        </div>
+    </div>
+    
+    <div style="display: flex; width: 100%; flex-direction:row; justify-content: center; margin-left: auto; margin-right: auto; margin-top: 2em;">
+                    
+        <button class="boton" style="width: 20%; margin: 2em;" onclick="document.location='platos/listado'">Volver a la lista</button>
+    </div>
+</div>
+{% endblock %}

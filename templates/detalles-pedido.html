@@ -1,0 +1,41 @@
+{% extends 'layout.html' %}
+<!-- Bloque del título -->
+{% block title %} Detalle de pedido:   {% endblock %}
+<!-- Detalles de el usuario seleccionado -->
+{% block contenido %}
+<div class="container">
+    <div style="display: flex; flex-direction: column; justify-content: center;align-items: center; margin-bottom: 4em;">
+        <p class="titulo" style="font-size: x-large; margin-bottom: 1%;"> Usuario: {{ usu.usuario }}</p>
+        <caption>Pedido número: {{idpedido}} </caption>
+    </div>
+    <table class="lista">
+        <thead style="border: 0ch;">
+            
+            <th> Artículo </th>
+            <th>Descripción</th>
+            <th> Cantidad </th>
+            <th> Valor </th> 
+        </thead>
+        {% if lista %}
+            {% for pedido in lista %}
+                {% if pedido.disponible == "N" %}
+                    <tr class="texto_opaco">
+                {% else %}
+                    <tr>
+                {%endif%}    
+                    <td>{{ pedido.nombre }}</td>
+                    <td>{{pedido.descripcion}}</td>
+                    <td>1</td>
+                    <td>${{ pedido.precio }}</td>
+                </tr>
+            {% endfor %}
+        {% endif %}
+    </table>
+    <div style="display: flex; flex-direction: column; justify-content: center;align-items: center; margin: 4em;">
+        <p class="titulo" style="font-size: large;"> Valor del pedido: ${{valor}} </p>
+    </div>
+    <div style="display: flex; width: 80%; flex-direction:row; justify-content: center; margin-left: auto; margin-right: auto;">
+        <button class="boton" style="width: auto;" onclick="document.location='/lista-pedidos'">Volver</button>
+    </div>
+</div>
+{% endblock %}

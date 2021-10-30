@@ -1,0 +1,64 @@
+{% extends 'layout.html' %}
+
+{% block title %}
+Detalle de Usuario
+{% endblock %}
+
+{% block contenido %}
+<div class="container" style="top: 60%;">
+
+    <div class="texto_opaco" style="display: flex; flex-direction: column; justify-content: center; align-items: center;">
+        <h2>Usuario:</h2>
+        <h1 class="titulo" style="margin-top: 0%;">{{item.nombre}}</h1>
+    </div>
+
+    <div style="display:flex; flex-direction: row; justify-content: center;align-items: center;">
+        <div style="display: flex; flex-direction: column; width: 35%; align-items: center; padding: 0%; align-content: center;">
+            <div><label class="titulo">Foto de perfil</label></div>
+            <div><img class="img-detalleusuario" src="../static/img/profile.jpg"></div>
+            <div><a class="texto_opaco" href="#">Editar imagen</a></div>
+        </div>
+        <div style="width: 60%; height: 100%; float: center; padding: 5%; vertical-align: middle;">
+            <form action="{{ url_for('editar_perfil') }}" method="POST" novalidate>
+                {{ form.hidden_tag() }}
+                <table style="vertical-align: baseline;">
+                    <tr>
+                        <th>Nombre de usuario</th>
+                        <td class="texto_opaco" style="border-bottom: 0ch;"> {{item.usuario}}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th id=encabezado>Nombre</th>
+                        <td id=texto_opaco style="border-bottom: 0ch;">{{ form.nombre(class="box", value=item.nombre)}}</td>
+                    </tr>
+                    <tr>
+                        <th id=encabezado>Correo</th>
+                        <td id=texto_opaco style="border-bottom: 0ch;">{{ form.correo(class="box", value=item.correo)}}</td>
+                    </tr>
+                    <tr>
+                        <th id=encabezado>Contraseña</th>
+                        <td id=texto_opaco style="border-bottom: 0ch;">{{ form.contrasena(class="box") }}</td>
+                    </tr>
+                    <tr>
+                        <th id=encabezado>Confirmar Contraseña</th>
+                        <td id=texto_opaco style="border-bottom: 0ch;">{{ form.confirmarcontrasena(class="box") }}</td>
+                    </tr>        
+                </table>
+
+                <div style="display: flex; flex-direction: column; justify-content: center; align-items: center;">
+                    {% if mensaje %}
+                        {{ mensaje }}
+                    {% endif %}
+                    <button class="boton" style="align-content: center; ;width: 20%; margin: 5%; "> {{ form.enviar(class="boton") }} </button>
+                </div>     
+               
+            </form>
+        </div>
+    </div>
+    
+    <div style="display: flex; width: 100%; flex-direction:row; justify-content: center; margin-left: auto; margin-right: auto; margin-top: 0em;">
+                    
+        <button class="boton" style="width: 20%; margin: 5%; margin-top: 0em;" onclick="document.location='inicio'">Inicio</button>
+    </div>
+</div>
+{% endblock %}

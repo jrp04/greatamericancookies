@@ -1,0 +1,225 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700&display=swap');
+
+/*
+   General configuraciones
+ */
+
+body {
+ width: 100%;
+ height: 100%;
+}
+
+* {
+   box-sizing: border-box;
+   margin: 0;
+   padding: 0;
+   background-color: #f1e8dd;
+   font-family: 'Roboto', sans-serif;
+   font-weight: 400;
+   text-decoration: none;
+ }
+
+.titulo {
+   margin: 1em;
+   padding-top: 0%;
+   color: #261F1B;
+   font-weight: 500;
+   display: flex;
+   flex-direction: column;
+   justify-content: center;
+   align-items: center;
+   vertical-align: middle;
+}
+
+.titulo-secundario {
+   display: flex;
+   flex-direction: column;
+   justify-content: center;
+   align-items: center;
+   vertical-align: middle;
+}
+
+/* 
+   CSS para header
+*/
+
+header div{
+   display: flex;
+   justify-content: space-between;
+   align-items: center;
+   padding: 20px 5%;
+}
+
+header .container-header{
+   position: fixed;
+   width: 100%;
+   border-style: solid;
+   border-color: white white black;
+}
+
+
+/* 
+   CSS Para tablas en general
+*/
+
+table {
+   border-collapse: collapse;
+   width: 100%;
+ }
+
+
+th {
+  font-weight: 500; 
+}
+
+ td {
+   padding: 8px;
+   text-align: center;
+   border-bottom: 1px solid rgb(200, 200, 200);
+ }
+
+ caption {
+   font-weight: bold;
+   padding-bottom: 12px;
+ }
+
+
+ /* 
+   Para el div de cada tabla, ajustarlo a la pantalla
+ */
+
+ .container{
+   display: flex;
+   flex-direction: column;
+   justify-content: center;
+
+   z-index: 10;
+   width: 80%;
+   -ms-transform: translate(-50%, -50%);
+   transform: translate(-50%, -50%);
+   padding: 1%;
+   padding-top: 0;
+   position: absolute;
+   top: 30em;
+   left: 50%;
+   height: 100%;
+ }
+
+ .center{
+   padding: 1%;
+   padding-top: 0;
+   position: absolute; top: 50%; z-index: 10;
+   display: flex;
+   flex-direction: column;
+   justify-content: center;
+   align-items: center;
+   vertical-align: middle;
+   margin: auto;
+   /* top: 40%; */
+   left: 50%;
+   -ms-transform: translate(-50%, -50%);
+   transform: translate(-50%, -50%);
+   width: 80%;
+ }
+
+ .input{
+   display: flex;
+   flex-direction: column;
+   justify-content: center;
+   align-items: center;
+   width: 100%;
+ }
+
+ .input input,
+ .box,
+ .box > option {
+   width: 100%;
+   margin: 0.8em;
+   padding: 0.5em;
+   border: hidden;
+   border-radius: 0.5em;
+   background-color: rgb(255, 255, 255);
+ }
+ 
+
+ .texto_opaco {
+    color: rgb(129, 129, 129);
+    font-weight: 400;
+    text-decoration: none;
+    align-self: center;
+ }
+
+ .boton {
+    padding-left: 2em;
+    padding-right: 2em;
+    align-self: center;
+    text-align: center;
+    border-radius: 0.5em;
+    line-height: 1.8em;
+    background-color: #242e42;
+    color: rgb(255, 255, 255);
+    border-style: none;
+    font-weight: 500;
+    
+ }
+
+.img-detalleusuario,
+.img-cookie {
+   width: 400px;
+}
+
+.lista {
+   border-collapse: collapse;
+   width: 90%;
+   margin-left: auto;
+   margin-right: auto;
+   margin-top: 3em;
+   margin-bottom: 2em;
+   border-spacing: 1%;
+ }
+
+ .lista th {
+   padding: 0.5%;
+   text-align: center;
+   border-bottom: 1px solid rgb(200, 200, 200);
+ }
+
+ .lista td {
+   padding: 0.5%;
+   text-align: center;
+   border-top: 1px solid rgb(200, 200, 200);
+ }
+
+#imgEliminar,
+#imgEditar,
+#imgCalificar,
+#imgEditarPerfil{
+   width: 1em;
+}
+
+
+.page-header {
+   position: fixed;
+   top: 10%;
+   padding: 1ch;
+   /* top: 0;
+   left: 0;
+   right: 0;
+   bottom: 0; */
+   /* overflow:hidden; */
+   display: flex;
+   flex-direction: column;
+   width: 12%;
+   background-color: #242e42;
+   height: 100%;
+   z-index: 15;
+ }
+
+ .transparent {
+    background-color: transparent;
+    border-color:transparent;
+ }
+
+ .white-text{ 
+    color: #f1e8dd;
+ }

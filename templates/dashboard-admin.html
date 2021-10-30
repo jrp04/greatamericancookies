@@ -1,0 +1,46 @@
+{% extends 'layout.html' %}
+
+{% block title %}
+Dashboard
+{% endblock %}
+
+
+{% block contenido %}
+
+  <div class="page-header">
+    <table class="transparent">
+        <caption class="transparent white-text" style="padding-top: 1em; height:auto; font-weight: 700;"><h1 class="transparent" style="height: auto;">Menu</h1></caption>
+        <tbody class="transparent" style="height: auto;">
+          <tr class="transparent white-text">
+            <td class="transparent"><a href="{{ url_for('usuarios') }}" class="transparent white-text" >Usuarios</a></td>
+          </tr>
+          <tr class="transparent white-text">
+            <td class="transparent"><a href="{{ url_for('list_pedidos') }}" class="transparent white-text" >Pedidos</a></td>
+          </tr>
+          <tr class="transparent white-text">
+            <td class="transparent">
+                <a class="transparent white-text" href="{{ url_for('get_listado_platos') }}">Platos</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+  </div>
+
+  <div class="center transparent" style="position: absolute; left: 55%;  top: 48%;">
+    <h1 class="titulo" style="margin-bottom: 10%;">Dashboard Administrativo</h1>
+    <div style="display: flex; width: 80%; flex-direction:row; justify-content: center; margin-left: auto; margin-right: auto;">
+      
+      <div class="boton" style="height: 10vw; width: 10vw;line-height: normal; display: flex; flex-direction: column; justify-content: center; margin-left: auto; margin-right: auto;">
+        <p class="transparent" style="font-weight: 600; font-size: xxx-large;">{{usuarios}}</p>
+        <p class="transparent" style="font-weight: 300; margin-top: 1em;">clientes registrados</p>
+      </div>
+      <div class="boton" style="height: 10vw; width: 10vw;line-height: normal; display: flex; flex-direction: column; justify-content: center; margin-left: auto; margin-right: auto;">
+        <p class="transparent" style="font-weight: 600; font-size: xxx-large;">{{menu}}</p>
+        <p class="transparent" style="font-weight: 300;" >Platos
+        </p>
+      </div>
+    </div>
+  </div>
+
+{% endblock %}
+

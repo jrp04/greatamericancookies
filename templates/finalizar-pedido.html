@@ -1,0 +1,98 @@
+{% extends 'layout.html' %}
+
+{% block title %}
+Lista de Platos
+{% endblock %}
+
+{% block contenido %}
+<div class="page-header">
+    <table class="transparent">
+        <caption class="transparent white-text" style="padding-top: 1%; height:auto; font-weight: 700;"><h1 class="transparent" style="height: auto; font-size: large; font-weight: 500;">Lista de deseos</h1></caption>
+        {% if listadeseos %}
+            {%for item in listadeseos %}
+                {% if item.precio %}
+                <tbody class="transparent" style="height: auto;">
+                <tr class="transparent white-text">
+                    <td class="transparent" style="padding-top: 2em; padding-right: 0%; width: min-content;">{{item.nombre}}</td>
+                    <td class="transparent" rowspan="2" style="width: min-content; padding: 0%;">
+                        <a class="transparent" href="{{ url_for('agregar_pedido', id=item.id, idlocation=item.idlocation) }}"><img class="transparent" id="imgCalificar" style="width: 2em" src="{{ url_for('static', filename='img/whitecart.png') }}"/></a>
+                    </td>
+                </tr>
+                <tr class="transparent white-text" style="border-bottom: 0.07em solid rgb(255, 255, 255);">
+                    <td class="transparent" style="padding-bottom: 12%;">${{item.precio}}</td>
+                </tr>
+                </tbody>
+                {%endif%}
+            {%endfor%}
+        {%else%}
+        <tbody class="transparent">
+            <tr class="transparent">
+                <td class="transparent" style="color: white; font-weight: 300;">No tienes nada en tu lista de deseos. </td>
+            </tr>
+        </tbody>
+        {%endif%}
+    </table>
+  </div>
+
+<div class="container">
+    <div class="titulo">
+        <h1>Finaliza tu pedido</h1>
+    </div>
+
+    <div>
+        <table class="lista">
+            {% if lista %}
+                <tr>
+                    <th style="border: 0">
+                        Plato
+                    </th>
+                    <th style="border: 0">
+                        Descripción
+                    </th>
+                    <th style="border: 0">
+                        Precio
+                    </th>
+                </tr>
+                {% for item in lista %}
+                    <tr>
+                        <td>{{ item.nombre }}</td>
+                        <td>{{ item.descripcion }}</td>
+                        <td>${{ item.precio }}</td>
+                        <td>
+                            <td style="padding-right: 1em;">
+                                <a href="{{url_for('eliminar_plato_pedido', id=item.id )}}">
+                                    <img id="imgCalificar" src="{{ url_for('static', filename='img/delete.png') }}"/>
+                                </a>
+                            </td>
+                        </td>
+                    </tr>
+                {% endfor %}
+                <tr>
+                    <td></td>
+                    <td style="font-weight: 900;">Total</td>
+                    <td style="font-weight: 600;">${{valor}}</td>
+                    <td></td>
+                    <td></td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="4">No hay platos en el pedido</td>
+                </tr>
+            {% endif %}
+        </table>
+    </div>
+    <div style="align-self: center; margin: 1%;">
+        {% if mensaje %}
+            {{ mensaje }}
+        {% endif %}
+    </div> 
+    <div style="display: flex; width: 80%; flex-direction:row; justify-content: center; margin-left: auto; margin-right: auto;">
+        {% if lista %}
+        <form action="{{ url_for('finalizar_pedido') }}" method="POST" novalidate>
+            <button class="boton" style="width: auto; margin: 5em;">{{ form.finalizarpedido(class="boton") }}</button>
+        </form>
+        {%endif%}
+        <button class="boton" style="width: auto;" onclick="document.location='/inicio'">Volver</button>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="{{ url_for('static',filename='css/styles.css') }}" />
+</head>
+<body>
+<div class="center" style="width: 50%;">
+        <h1 class="titulo" style="font-size: 4em; padding: 1em; padding-bottom: 0.5em; text-align: center; font-weight: 400; margin: 1em;">Great American Cookies</h1>
+        <form style="width: 40%;"action="{{ url_for('login')}}" method="POST" novalidate>
+            {{ form.hidden_tag() }}
+            <div class="input">
+                {{ form.usuario.label }}
+                {{ form.usuario(class="control")}}
+            </div>
+            <div class="input">
+                {{ form.contrasena.label }}
+                {{ form.contrasena(class="control")}}
+            </div>
+            
+            <div style="margin-top: 10">
+                <div style="width: 60%; padding-left: 0rem; margin-top: 0em; font-size: small;float: right;">
+                    {{ form.iniciar_sesion(class="boton") }}
+                </div>
+                <div style="width: 30%; margin-top: 1em;">
+                    <a class="texto_opaco" style="font-size: small;float: right;" href="{{ url_for('registro') }}">
+                        Registrarme
+                    </a>
+                </div>
+            </div>
+            
+            <br>  
+            <br>
+            <div>
+                {% if mensaje %}
+                    {{ mensaje }}
+                {% endif %}
+            </div>                                
+        </form>   
+</div>
+</body>
+</html>

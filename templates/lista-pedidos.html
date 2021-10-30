@@ -1,0 +1,45 @@
+{% extends 'layout.html' %}
+{% block title %}Lista de pedidos{% endblock title %}
+{% block contenido %}
+    <div class="container">    
+        <div style="display: flex; flex-direction: column; justify-content: center;">
+            <table class="lista">
+                <caption style="padding: 0; height:auto;"><h1 class="titulo" style="height: auto;">Pedidos</h1></caption>
+                <thead>
+                    <th class="texto_opaco"> # </th>
+                    <th class="texto_opaco"> Nombre </th>
+                    <th class="texto_opaco"> Valor del pedido </th> 
+                    <th class="texto_opaco"> Estado </th>
+                    <th></th>
+                    <th></th>
+                </thead>
+                {% if content %}
+                    {% for pedido in content %}
+                        <tr>
+                            <td>{{ pedido.id }}</td>
+                            <td>{{ pedido.usuario}}</td>
+                            <td>${{pedido.totalpedido}}</td>
+                            <td>{{ pedido.estado }}</td>
+                            <td>
+                                <a class="texto_opaco" href="{{ url_for('detail_pedido', id=pedido.id) }}">Detalle</a>
+                            </td>
+                            <td>
+                                <!-- <a href="{{ url_for('detail_pedido', id=pedido.id_pedido) }}">Eliminar</a> -->
+                                <a class="texto_opaco" href="{{ url_for('eliminar_pedido', id=pedido.id) }}">Eliminar</a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                {% endif %}
+            </table>
+            <div style="align-self: center;">
+                {% if mensaje %}
+                    {{ mensaje }}
+                {% endif %}
+            </div>   
+        </div>
+        <div style="display: flex; width: 80%; flex-direction:row; justify-content: center; margin-left: auto; margin-right: auto;">
+            <button class="boton" style="width: auto;" onclick="document.location='/dashboard-admin'">Volver</button>
+        </div>
+    </div>
+{% endblock contenido %}
+    

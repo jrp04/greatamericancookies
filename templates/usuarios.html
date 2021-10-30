@@ -1,0 +1,61 @@
+{% extends 'layout.html' %}
+
+{% block title %}
+Usuarios
+{% endblock %}
+
+{% block contenido %}
+<div class="center">
+    <div class="titulo" style="margin-bottom: 5em;">
+        <h1>Usuarios</h1>
+    </div>
+
+    <div style="width: 100%;"> 
+        <table>
+            <tr>
+            <th class="texto_opaco">Nombre</th>
+            <th class="texto_opaco">Rol</th>
+            <th class="texto_opaco"></th>
+            <th class="texto_opaco"></th>
+            </tr>
+            {% if lista %}
+                {% if session.get('rol') == "Administrador"%}
+                    {% for item in lista%}
+                    {% if not (item.rol == "Administrador" or item.rol == "Super Administrador")%}
+                            <tr>
+                                <td>{{item.nombre}}</td>
+                                <td>{{item.rol}}</td>
+                                <td><a href="{{ url_for('detalle_usuario', id=item.id) }}">Editar</a></td>  
+                                <td><a href="{{ url_for('eliminar_usuario', id=item.id) }}">Eliminar</a></td>  
+                            </tr>
+                    {%endif%}
+                    {% endfor %}
+                {%endif%}
+                {% if session.get('rol') == "Super Administrador"%}
+                    {% for item in lista if item.usuario != session.get('nombre_usuario') %}
+                            <tr>
+                                <td>{{item.nombre}}</td>
+                                <td>{{item.rol}}</td>
+                                <td><a href="{{ url_for('detalle_usuario', id=item.id) }}">Editar</a></td>  
+                                <td><a href="{{ url_for('eliminar_usuario', id=item.id) }}">Eliminar</a></td>  
+                            </tr>
+                    {% endfor %}
+                {%endif%}
+            {% else %}
+                <tr>
+                    <td colspan="4">No se encontraron usuarios en la base de datos</td>
+                </tr>
+            {% endif %}
+        </table>
+    </div>
+    <div>
+    <!-- <div style="display: flex; width: 80%; flex-direction:row; justify-content: center; margin-left: auto; margin-right: auto;"></div> -->
+        
+        <button class="boton" style="width: auto; margin: 5em;" onclick="document.location='/dashboard-admin'">Volver</button>
+    </div>
+</div>
+
+<!-- <div style="display: inline; width: 30%; padding-left: 40em ; padding-right: 40em ;"></div>
+<div style="display: inline; width: 30%; padding-left: 2em; padding-right: 2em;"><button class="boton" style="width: 10%;">Agregar usuario</button></div>
+<div style="display: inline; width: 30%; padding-left: 2em; margin-right: 2em;"><button class="boton" style="width: 10%;">Volver</button></div> -->
+{% endblock %}
